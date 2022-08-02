@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, NgModule } from '@angular/core';
+import { ToDo } from 'src/app/models/models';
 import { ToDoService } from 'src/app/services/toDo/to-do.service';
 
 @Component({
@@ -7,12 +7,17 @@ import { ToDoService } from 'src/app/services/toDo/to-do.service';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss']
 })
+
 export class IndexComponent implements OnInit {
-  toDos: string[] = []
+  toDos: ToDo[] = this.toDoService.getToDos();
 
   constructor(private toDoService: ToDoService) { }
 
   ngOnInit(): void {
-    this.toDos = this.toDoService.toDos;
+  }
+
+  addToDo(toDoText: string) {
+    this.toDoService.addTodo(toDoText);
+    this.toDos = this.toDoService.getToDos();
   }
 }

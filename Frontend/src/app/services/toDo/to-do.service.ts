@@ -1,16 +1,24 @@
 import { Injectable } from '@angular/core';
-import { UrlSerializer } from '@angular/router';
+import { ToDo } from 'src/app/models/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ToDoService {
-  toDos: string[] = [];
+  private toDos: ToDo[] = [];
 
   constructor() { }
 
-  addTodo(toDo: string): boolean {
+  addTodo(toDoText: string): boolean {
+    const toDo: ToDo = {
+      text: toDoText,
+      isFinished: false
+    }
     this.toDos.push(toDo);
     return true;
+  }
+
+  getToDos(): ToDo[] {
+    return this.toDos;
   }
 }
