@@ -20,4 +20,9 @@ export class IndexComponent implements OnInit {
     this.toDoService.addTodo(toDoText);
     this.toDos = this.toDoService.getToDos();
   }
+
+  finishToDo(index: number): void {
+    this.toDoService.finishToDo(index);
+    this.toDos = this.toDoService.getToDos();
+  }
 }

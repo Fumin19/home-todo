@@ -3,12 +3,15 @@
         <input type="text" #box>
         <button type="submit" (click)="addToDo(box.value)">Submit</button>
     </div>
-<div *ngFor="let toDo of toDos">
-    <ul>
-        <li *ngIf="toDo.isFinished === false" class="notFinished">{{toDo.text}}</li>
-        <li *ngIf="toDo.isFinished === true" class="finished">{{toDo.text}}</li>
-        <!-- <button type="submit" (click)="finishToDo(box.value)">Finished</button> -->
-    </ul>
-</div>
+<div *ngFor="let toDo of toDos;let indexOfelement=index;">
+        <div *ngIf="toDo.isFinished === false" class="notFinished">
+            <button type="submit" (click)="finishToDo(indexOfelement)">Finished</button>
+            {{toDo.text}}
+        </div>
+        <div *ngIf="toDo.isFinished === true" class="finished">
+            <button type="submit" (click)="finishToDo(indexOfelement)">Finished</button>
+            {{toDo.text}}
+        </div>
 
-<!-- style="display: none" -->
+        <!-- <button type="submit" (click)="finishToDo(box.value)">Finished</button> -->
+</div>

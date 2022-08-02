@@ -21,4 +21,8 @@ export class ToDoService {
   getToDos(): ToDo[] {
     return this.toDos;
   }
+
+  finishToDo(index: number): void {
+    this.toDos[index].isFinished = !this.toDos[index].isFinished;
+  }
 }
