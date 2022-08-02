@@ -22,13 +22,12 @@ export class IndexComponent implements OnInit {
     this.resetList();
   }
 
-  finishToDo(index: number): void {
-    this.toDoService.finishToDo(index);
+  finishToDo(id: number): void {
+    this.toDoService.finishToDo(id);
     this.resetList();
   }
 
   resetList(): void {
-    this.getAllTasks();
     this.unfinishedTasks = this.toDoService.getUnfinishedTasks().length;
     console.log(this.unfinishedTasks)
   }

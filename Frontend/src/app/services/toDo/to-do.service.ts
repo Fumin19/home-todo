@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { throwError } from 'rxjs';
 import { ToDo } from 'src/app/models/models';
 
 @Injectable({
@@ -11,6 +12,7 @@ export class ToDoService {
 
   addTodo(toDoText: string): boolean {
     const toDo: ToDo = {
+      id: this.toDos.length,
       text: toDoText,
       isFinished: false
     }
@@ -22,8 +24,20 @@ export class ToDoService {
     return this.toDos;
   }
 
-  finishToDo(index: number): void {
-    this.toDos[index].isFinished = !this.toDos[index].isFinished;
+  findToDoById(id: number): ToDo {
+    let toDo = this.toDos.find(x => {
+      return x.id === id;
+    })
+    if (toDo) {
+      return toDo;
+    } else {
+      throw new Error('Could not get structure name')
+    }   
+  } 
+
+  finishToDo(id: number): void {
+    let toDo = this.findToDoById(id);
+    toDo.isFinished = !toDo.isFinished;
   }
 
   getUnfinishedTasks(): ToDo[] {

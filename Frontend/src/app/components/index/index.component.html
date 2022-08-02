@@ -5,14 +5,14 @@
     <button type="submit" (click)="addToDo(box.value)">Submit</button>
 </div>
 <hr>
-<div *ngFor="let toDo of toDos;let indexOfelement=index;">
+<div *ngFor="let toDo of toDos;">
         <div *ngIf="toDo.isFinished === false" class="listpadding">
-            <button type="submit" class="buttonRed" (click)="finishToDo(indexOfelement)"></button>
+            <button type="submit" class="buttonRed" (click)="finishToDo(toDo.id)"></button>
             {{toDo.text}}
         </div>
 
         <div *ngIf="toDo.isFinished === true" class="listpadding">
-            <button type="submit" class="buttonGreen" (click)="finishToDo(indexOfelement)"></button>
+            <button type="submit" class="buttonGreen" (click)="finishToDo(toDo.id)"></button>
             {{toDo.text}}
         </div>
 </div>
