@@ -1,7 +1,17 @@
-.finished {
-    color: green;
+.listpadding {
+    padding: 5px;
 }
 
-.notFinished {
-    color: red;
+.buttonRed {
+    border-radius: 50%;
+    background: red;
+    width: 10px;
+    height: 15px;
+}
+
+.buttonGreen {
+    border-radius: 50%;
+    background: green;
+    width: 10px;
+    height: 15px;
 }

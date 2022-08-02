@@ -1,17 +1,16 @@
-<p>index works!</p>
+<h3>ToDo application</h3>
     <div>
         <input type="text" #box>
         <button type="submit" (click)="addToDo(box.value)">Submit</button>
     </div>
 <div *ngFor="let toDo of toDos;let indexOfelement=index;">
-        <div *ngIf="toDo.isFinished === false" class="notFinished">
-            <button type="submit" (click)="finishToDo(indexOfelement)">Finished</button>
-            {{toDo.text}}
-        </div>
-        <div *ngIf="toDo.isFinished === true" class="finished">
-            <button type="submit" (click)="finishToDo(indexOfelement)">Finished</button>
+        <div *ngIf="toDo.isFinished === false" class="listpadding">
+            <button type="submit" class="buttonRed" (click)="finishToDo(indexOfelement)"></button>
             {{toDo.text}}
         </div>
 
-        <!-- <button type="submit" (click)="finishToDo(box.value)">Finished</button> -->
+        <div *ngIf="toDo.isFinished === true" class="listpadding">
+            <button type="submit" class="buttonGreen" (click)="finishToDo(indexOfelement)"></button>
+            {{toDo.text}}
+        </div>
 </div>
