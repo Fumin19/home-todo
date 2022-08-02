@@ -78,13 +78,16 @@ export class ToDoService {
           this.finishToDo(this.toDos[i].id);
         }
     }
+    console.log(this.toDos.length)
   }
 
   deleteCompleted(): void {
-    for (let i = 0; i < this.toDos.length; i++) {
-      console.log(this.toDos[i].isFinished)
+    for (let i = 0; i < this.toDos.length;) {
+      console.log(this.toDos.length);
       if (this.toDos[i].isFinished === true) {
         this.deleteToDo(this.toDos[i].id);
+      } else {
+        i++;
       }
     }
   }
