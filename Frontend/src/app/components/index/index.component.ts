@@ -24,12 +24,12 @@ export class IndexComponent implements OnInit {
 
   finishToDo(id: number): void {
     this.toDoService.finishToDo(id);
+    this.getAllTasks();
     this.resetList();
   }
 
   resetList(): void {
     this.unfinishedTasks = this.toDoService.getUnfinishedTasks().length;
-    console.log(this.unfinishedTasks)
   }
 
   getFinishedTasks(): void {
@@ -47,13 +47,16 @@ export class IndexComponent implements OnInit {
   deleteToDo(id: number): void {
     this.toDoService.deleteToDo(id);
     this.getAllTasks();
+    this.resetList();
   }
 
   completeAllTasks(): void {
     this.toDoService.completeAllTasks();
+    this.resetList();
   }
 
   deleteCompleted(): void {
     this.toDoService.deleteCompleted();
+    this.resetList();
   }
 }

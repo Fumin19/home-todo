@@ -12,12 +12,16 @@ export class ToDoService {
 
   addTodo(toDoText: string): boolean {
     const toDo: ToDo = {
-      id: this.toDos.length,
+      id: this.randomId(),
       text: toDoText,
       isFinished: false
     }
     this.toDos.push(toDo);
     return true;
+  }
+
+  randomId(): number {
+    return Math.random() * 1000;
   }
 
   getToDos(): ToDo[] {
@@ -64,9 +68,7 @@ export class ToDoService {
   }
 
   deleteToDo(id: number): void {
-    let indexOfToDo = this.toDos.findIndex(t => {
-      t.id === id;
-    })
+    let indexOfToDo = this.toDos.findIndex((t) => t.id === id);
     this.toDos.splice(indexOfToDo, 1);
   }
 
@@ -80,8 +82,9 @@ export class ToDoService {
 
   deleteCompleted(): void {
     for (let i = 0; i < this.toDos.length; i++) {
+      console.log(this.toDos[i].isFinished)
       if (this.toDos[i].isFinished === true) {
-        this.toDos.splice(i, 1)
+        this.deleteToDo(this.toDos[i].id);
       }
     }
   }
