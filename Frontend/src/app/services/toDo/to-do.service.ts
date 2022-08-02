@@ -25,4 +25,17 @@ export class ToDoService {
   finishToDo(index: number): void {
     this.toDos[index].isFinished = !this.toDos[index].isFinished;
   }
+
+  getUnfinishedTasks(): number {
+    // return this.toDos.filter(t => {
+    //   t.isFinished === true;
+    // }).length;
+    let counter: number = 0;
+    for (let i=0; i < this.toDos.length; i++) {
+      if (this.toDos[i].isFinished === false) {
+        counter ++;
+      }
+    }
+    return counter;
+  }
 }

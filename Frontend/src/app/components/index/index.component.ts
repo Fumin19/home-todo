@@ -10,19 +10,26 @@ import { ToDoService } from 'src/app/services/toDo/to-do.service';
 
 export class IndexComponent implements OnInit {
   toDos: ToDo[] = this.toDoService.getToDos();
+  unfinishedTasks: number = this.toDoService.getUnfinishedTasks()
 
   constructor(private toDoService: ToDoService) { }
 
   ngOnInit(): void {
   }
 
-  addToDo(toDoText: string) {
+  addToDo(toDoText: string): void {
     this.toDoService.addTodo(toDoText);
-    this.toDos = this.toDoService.getToDos();
+    this.resetList();
   }
 
   finishToDo(index: number): void {
     this.toDoService.finishToDo(index);
+    this.resetList();
+  }
+
+  resetList(): void {
     this.toDos = this.toDoService.getToDos();
+    this.unfinishedTasks = this.toDoService.getUnfinishedTasks();
+    console.log(this.unfinishedTasks)
   }
 }
