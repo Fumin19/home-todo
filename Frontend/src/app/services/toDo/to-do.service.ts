@@ -26,16 +26,26 @@ export class ToDoService {
     this.toDos[index].isFinished = !this.toDos[index].isFinished;
   }
 
-  getUnfinishedTasks(): number {
+  getUnfinishedTasks(): ToDo[] {
     // return this.toDos.filter(t => {
-    //   t.isFinished === true;
-    // }).length;
-    let counter: number = 0;
+    //    t.isFinished === true;
+    // });
+    let unfinishedTasks: ToDo[] = []
     for (let i=0; i < this.toDos.length; i++) {
       if (this.toDos[i].isFinished === false) {
-        counter ++;
+        unfinishedTasks.push(this.toDos[i])
       }
     }
-    return counter;
+    return unfinishedTasks;
+  }
+
+  getFinishedTasks(): ToDo[] {
+    let finishedTasks: ToDo[] = []
+    for (let i=0; i < this.toDos.length; i++) {
+      if (this.toDos[i].isFinished === true) {
+        finishedTasks.push(this.toDos[i])
+      }
+    }
+    return finishedTasks;
   }
 }

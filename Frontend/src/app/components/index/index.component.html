@@ -17,8 +17,13 @@
         </div>
 </div>
 
+<hr *ngIf="toDos.length > 0">
+
 <div>
     <p>{{unfinishedTasks}} tasks left</p>
+    <button type="submit" (click)="getAllTasks()">All</button>
+    <button type="submit" (click)="getUnfinishedTasks()">Uncompleted</button>
+    <button type="submit" (click)="getFinishedTasks()">Completed</button>
 </div>
 
 

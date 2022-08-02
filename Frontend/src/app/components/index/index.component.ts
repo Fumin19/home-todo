@@ -10,7 +10,7 @@ import { ToDoService } from 'src/app/services/toDo/to-do.service';
 
 export class IndexComponent implements OnInit {
   toDos: ToDo[] = this.toDoService.getToDos();
-  unfinishedTasks: number = this.toDoService.getUnfinishedTasks()
+  unfinishedTasks: number = this.toDoService.getUnfinishedTasks().length;
 
   constructor(private toDoService: ToDoService) { }
 
@@ -28,8 +28,20 @@ export class IndexComponent implements OnInit {
   }
 
   resetList(): void {
-    this.toDos = this.toDoService.getToDos();
-    this.unfinishedTasks = this.toDoService.getUnfinishedTasks();
+    this.getAllTasks();
+    this.unfinishedTasks = this.toDoService.getUnfinishedTasks().length;
     console.log(this.unfinishedTasks)
+  }
+
+  getFinishedTasks(): void {
+    this.toDos = this.toDoService.getFinishedTasks()
+  }
+
+  getUnfinishedTasks(): void {
+    this.toDos = this.toDoService.getUnfinishedTasks()
+  }
+
+  getAllTasks(): void {
+    this.toDos = this.toDoService.getToDos();
   }
 }
