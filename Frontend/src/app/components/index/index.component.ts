@@ -48,4 +48,12 @@ export class IndexComponent implements OnInit {
     this.toDoService.deleteToDo(id);
     this.getAllTasks();
   }
+
+  completeAllTasks(): void {
+    this.toDoService.completeAllTasks();
+  }
+
+  deleteCompleted(): void {
+    this.toDoService.deleteCompleted();
+  }
 }

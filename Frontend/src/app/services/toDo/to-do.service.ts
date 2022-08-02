@@ -69,4 +69,20 @@ export class ToDoService {
     })
     this.toDos.splice(indexOfToDo, 1);
   }
+
+  completeAllTasks(): void {
+    for (let i = 0; i < this.toDos.length; i++) {
+        if (this.toDos[i].isFinished === false) {
+          this.finishToDo(this.toDos[i].id);
+        }
+    }
+  }
+
+  deleteCompleted(): void {
+    for (let i = 0; i < this.toDos.length; i++) {
+      if (this.toDos[i].isFinished === true) {
+        this.toDos.splice(i, 1)
+      }
+    }
+  }
 }

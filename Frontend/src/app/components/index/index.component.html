@@ -4,6 +4,18 @@
     <input type="text" #box>
     <button type="submit" (click)="addToDo(box.value)">Submit</button>
 </div>
+
+<br>
+
+<div>
+    <button type="submit" (click)="completeAllTasks()">
+        Complete all tasks
+    </button>
+    <button type="submit" (click)="deleteCompleted()">
+        Delete completed
+    </button>
+</div>
+
 <hr>
 <div *ngFor="let toDo of toDos;">
         <div *ngIf="toDo.isFinished === false" class="listpadding">
