@@ -62,4 +62,11 @@ export class ToDoService {
     }
     return finishedTasks;
   }
+
+  deleteToDo(id: number): void {
+    let indexOfToDo = this.toDos.findIndex(t => {
+      t.id === id;
+    })
+    this.toDos.splice(indexOfToDo, 1);
+  }
 }

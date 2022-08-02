@@ -9,11 +9,13 @@
         <div *ngIf="toDo.isFinished === false" class="listpadding">
             <button type="submit" class="buttonRed" (click)="finishToDo(toDo.id)"></button>
             {{toDo.text}}
+            <button type="submit" class="deleteButton" (click)="deleteToDo(toDo.id)">X</button>
         </div>
 
         <div *ngIf="toDo.isFinished === true" class="listpadding">
             <button type="submit" class="buttonGreen" (click)="finishToDo(toDo.id)"></button>
             {{toDo.text}}
+            <button type="submit" class="deleteButton" (click)="deleteToDo(toDo.id)">X</button>
         </div>
 </div>
 
