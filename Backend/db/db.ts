@@ -1,16 +1,13 @@
 const mysql = require('mysql2')
 
 // connection params
-const con = mysql.createConnection({
+const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: "123456",
 })
 
-con.connect((err) => {
-    if (err) throw err;
-    console.log('Db is connected!')
-})
+export { db };
 
 // con.query(`select * from toDoAppDatabase.toDos`, (err, res) => {
 //     if (err) {
