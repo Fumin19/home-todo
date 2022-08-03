@@ -1,8 +1,8 @@
 <h3>ToDo application</h3>
 
 <div>
-    <input type="text" #box>
-    <button type="submit" (click)="addToDo(box.value)">Submit</button>
+    <input class="new-todo" placeholder="Whats need to be done?" autoFocus [value]="toDoText" (keyup)="changeText($event)"
+        (keyup.enter)="addToDo()" />
 </div>
 
 <br>
