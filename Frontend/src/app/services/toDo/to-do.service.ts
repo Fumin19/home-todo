@@ -10,12 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class ToDoService {
   private toDos: ToDo[] = [];
   private url = 'http://localhost:3000'
-  $toDos: BehaviorSubject<any> = new BehaviorSubject(null);
-
-  constructor(private http: HttpClient) {
-    this.http.get<ToDo[]>(this.url + '/toDoList')
-    .subscribe((data) => this.$toDos.next(data))
-   }
+  constructor(private http: HttpClient) { }
 
   addTodo(toDoText: string): boolean {
     const toDo: ToDo = {
@@ -31,16 +26,17 @@ export class ToDoService {
     return Math.random() * 1000;
   }
 
-  getToDos(): ToDo[] {
-    return this.toDos;
-  }
-
   getToDoList(): Observable<ToDo[]> {
     return this.http.get<ToDo[]>(
       this.url + '/toDoList'
     );
   }
-
+  
+  finishToDo(id: number): Observable<any> {
+    return this.http.post(this.url + '/finishToDo', {
+        toDoId: id
+    })
+  }
 
   findToDoById(id: number): ToDo {
     let toDo = this.toDos.find(x => {
@@ -52,16 +48,6 @@ export class ToDoService {
       throw new Error('Could not find ToDo')
     }   
   } 
-
-  finishToDo(id: number): Observable<any> {
-      return this.http.post(this.url + '/finishToDo', {
-        structureId: id
-    });
-
-
-    let toDo = this.findToDoById(id);
-    toDo.isFinished = 1;
-  }
 
   getUnfinishedTasks(): ToDo[] {
     // return this.toDos.filter(t => {

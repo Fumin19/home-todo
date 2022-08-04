@@ -18,10 +18,8 @@ export class ToDoService{
         return new Promise((resolve, reject) => {
             db.query(`update toDoApp.toDos set isFinished = 1 where id = ${toDoId}`, (err, res) => {
                 if (err) {
-                    console.log("in err");
                     reject(err)
                 } else {
-                    console.log("in resolve");
                     resolve(res)
                 }
             }) 

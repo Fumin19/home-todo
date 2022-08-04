@@ -1,5 +1,5 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ToDo } from 'src/app/models/models';
 import { ToDoService } from 'src/app/services/toDo/to-do.service';
 
@@ -10,7 +10,7 @@ import { ToDoService } from 'src/app/services/toDo/to-do.service';
 })
 
 export class IndexComponent implements OnInit {
-  $toDos: Observable<ToDo[]> = new Observable();
+  toDos!: ToDo[]
   unfinishedTasks: number = this.toDoService.getUnfinishedTasks().length;
   toDoText: string = '';
   
@@ -18,7 +18,7 @@ export class IndexComponent implements OnInit {
   constructor(private toDoService: ToDoService) { }
 
   ngOnInit() {
-    this.$toDos = this.toDoService.$toDos;
+    this.getAllToDos()
   }
 
   changeText(event: Event): void{ 
@@ -26,18 +26,28 @@ export class IndexComponent implements OnInit {
     this.toDoText = target.value
   }
 
-  addToDo(): void {
-    this.toDoService.addTodo(this.toDoText);
-    this.resetList();
-    this.toDoText = '';
+  getAllToDos(): void {
+    this.toDoService.getToDoList().subscribe((toDos) => {
+      this.toDos = toDos
+    })
   }
 
   finishToDo(id: number): void {
-    this.toDoService.finishToDo(id);
+    this.toDoService.finishToDo(id).subscribe((res) => {
+      if(res.message === 'OK') {       
+        const toDo = this.toDos.find((t) => 
+            t.id === id
+        );
+      if (toDo) {
+        toDo.isFinished = 1;
+      }        
+      }
+    })
   }
 
-  resetList(): void {
-    this.unfinishedTasks = this.toDoService.getUnfinishedTasks().length;
+  addToDo(): void {
+    this.toDoService.addTodo(this.toDoText);
+    this.toDoText = '';
   }
 
   getFinishedTasks(): void {
@@ -48,25 +58,22 @@ export class IndexComponent implements OnInit {
     // this.toDos = this.toDoService.getUnfinishedTasks()
   }
 
-  getAllToDos(): void {
-    // this.toDos = this.toDoService.getToDos();
-  }
+
 
   deleteToDo(id: number): void {
     this.toDoService.deleteToDo(id);
     this.getAllToDos();
-    this.resetList();
   }
 
-  completeAllTasks(): void {
-    this.toDoService.completeAllTasks();
-    this.getAllToDos();
-    this.resetList();
-  }
+  // completeAllTasks(): void {
+  //   this.toDoService.completeAllTasks();
+  //   this.getAllToDos();
+  //   this.resetList();
+  // }
 
-  deleteCompleted(): void {
-    this.toDoService.deleteCompleted();
-    this.getAllToDos();
-    this.resetList();
-  }
+  // deleteCompleted(): void {
+  //   this.toDoService.deleteCompleted();
+  //   this.getAllToDos();
+  //   this.resetList();
+  // }
 }

@@ -6,7 +6,7 @@
 </div>
 
 <br>
-
+<!-- 
 <div>
     <button type="submit" (click)="completeAllTasks()">
         Complete all tasks
@@ -14,10 +14,10 @@
     <button type="submit" (click)="deleteCompleted()">
         Delete completed
     </button>
-</div>
+</div> -->
 
 <hr>
-<div *ngFor="let toDo of $toDos | async;">
+<div *ngFor="let toDo of toDos">
         <div *ngIf="toDo.isFinished === 0" class="listpadding">
             <button type="submit" class="buttonRed" (click)="finishToDo(toDo.id)"></button>
             {{toDo.text}}
