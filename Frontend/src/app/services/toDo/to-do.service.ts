@@ -21,7 +21,7 @@ export class ToDoService {
     const toDo: ToDo = {
       id: this.randomId(),
       text: toDoText,
-      isFinished: false
+      isFinished: 0
     }
     this.toDos.push(toDo);
     return true;
@@ -55,7 +55,7 @@ export class ToDoService {
 
   finishToDo(id: number): void {
     let toDo = this.findToDoById(id);
-    toDo.isFinished = !toDo.isFinished;
+    toDo.isFinished = 1;
   }
 
   getUnfinishedTasks(): ToDo[] {
@@ -64,7 +64,7 @@ export class ToDoService {
     // });
     let unfinishedTasks: ToDo[] = []
     for (let i=0; i < this.toDos.length; i++) {
-      if (this.toDos[i].isFinished === false) {
+      if (this.toDos[i].isFinished === 0) {
         unfinishedTasks.push(this.toDos[i])
       }
     }
@@ -74,7 +74,7 @@ export class ToDoService {
   getFinishedTasks(): ToDo[] {
     let finishedTasks: ToDo[] = []
     for (let i=0; i < this.toDos.length; i++) {
-      if (this.toDos[i].isFinished === true) {
+      if (this.toDos[i].isFinished === 1) {
         finishedTasks.push(this.toDos[i])
       }
     }
@@ -88,7 +88,7 @@ export class ToDoService {
 
   completeAllTasks(): void {
     for (let i = 0; i < this.toDos.length; i++) {
-        if (this.toDos[i].isFinished === false) {
+        if (this.toDos[i].isFinished === 0) {
           this.finishToDo(this.toDos[i].id);
         }
     }
@@ -96,7 +96,7 @@ export class ToDoService {
 
   deleteCompleted(): void {
     for (let i = 0; i < this.toDos.length;) {
-      if (this.toDos[i].isFinished === true) {
+      if (this.toDos[i].isFinished === 1) {
         this.deleteToDo(this.toDos[i].id);
       } else {
         i++;

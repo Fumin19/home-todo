@@ -19,7 +19,6 @@ export class IndexComponent implements OnInit {
 
   ngOnInit() {
     this.$toDos = this.toDoService.$toDos;
-    console.log(this.$toDos)
   }
 
   changeText(event: Event): void{ 

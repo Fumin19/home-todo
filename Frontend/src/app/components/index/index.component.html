@@ -18,13 +18,13 @@
 
 <hr>
 <div *ngFor="let toDo of $toDos | async;">
-        <div *ngIf="toDo.isFinished === false" class="listpadding">
+        <div *ngIf="toDo.isFinished === 0" class="listpadding">
             <button type="submit" class="buttonRed" (click)="finishToDo(toDo.id)"></button>
             {{toDo.text}}
             <button type="submit" class="deleteButton" (click)="deleteToDo(toDo.id)">X</button>
         </div>
 
-        <div *ngIf="toDo.isFinished === true" class="listpadding">
+        <div *ngIf="toDo.isFinished === 1" class="listpadding">
             <button type="submit" class="buttonGreen" (click)="finishToDo(toDo.id)"></button>
             {{toDo.text}}
             <button type="submit" class="deleteButton" (click)="deleteToDo(toDo.id)">X</button>
