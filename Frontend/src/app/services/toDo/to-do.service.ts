@@ -53,7 +53,12 @@ export class ToDoService {
     }   
   } 
 
-  finishToDo(id: number): void {
+  finishToDo(id: number): Observable<any> {
+      return this.http.post(this.url + '/finishToDo', {
+        structureId: id
+    });
+
+
     let toDo = this.findToDoById(id);
     toDo.isFinished = 1;
   }

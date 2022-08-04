@@ -34,8 +34,6 @@ export class IndexComponent implements OnInit {
 
   finishToDo(id: number): void {
     this.toDoService.finishToDo(id);
-    this.getAllToDos();
-    this.resetList();
   }
 
   resetList(): void {
