@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { ToDo } from 'src/app/models/models';
 import { HttpClient } from '@angular/common/http';
 
@@ -10,9 +10,12 @@ import { HttpClient } from '@angular/common/http';
 export class ToDoService {
   private toDos: ToDo[] = [];
   private url = 'http://localhost:3000'
-  $toDoList: Observable<ToDo[]> = this.getToDoList()
+  $toDos: BehaviorSubject<any> = new BehaviorSubject(null);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.http.get<ToDo[]>(this.url + '/toDoList')
+    .subscribe((data) => this.$toDos.next(data))
+   }
 
   addTodo(toDoText: string): boolean {
     const toDo: ToDo = {
@@ -89,12 +92,10 @@ export class ToDoService {
           this.finishToDo(this.toDos[i].id);
         }
     }
-    console.log(this.toDos.length)
   }
 
   deleteCompleted(): void {
     for (let i = 0; i < this.toDos.length;) {
-      console.log(this.toDos.length);
       if (this.toDos[i].isFinished === true) {
         this.deleteToDo(this.toDos[i].id);
       } else {

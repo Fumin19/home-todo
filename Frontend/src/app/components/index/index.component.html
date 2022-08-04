@@ -17,7 +17,7 @@
 </div>
 
 <hr>
-<div *ngFor="let toDo of ($toDos | async);">
+<div *ngFor="let toDo of $toDos | async;">
         <div *ngIf="toDo.isFinished === false" class="listpadding">
             <button type="submit" class="buttonRed" (click)="finishToDo(toDo.id)"></button>
             {{toDo.text}}

@@ -10,20 +10,21 @@ import { ToDoService } from 'src/app/services/toDo/to-do.service';
 })
 
 export class IndexComponent implements OnInit {
-  $toDos: Observable<ToDo[]> = new Observable;
+  $toDos: Observable<ToDo[]> = new Observable();
   unfinishedTasks: number = this.toDoService.getUnfinishedTasks().length;
   toDoText: string = '';
   
 
   constructor(private toDoService: ToDoService) { }
 
+  ngOnInit() {
+    this.$toDos = this.toDoService.$toDos;
+    console.log(this.$toDos)
+  }
+
   changeText(event: Event): void{ 
     const target = event.target as HTMLInputElement
     this.toDoText = target.value
-  }
-
-  async ngOnInit() {
-    this.$toDos = this.toDoService.$toDoList
   }
 
   addToDo(): void {
