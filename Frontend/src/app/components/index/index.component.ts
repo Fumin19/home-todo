@@ -38,7 +38,7 @@ export class IndexComponent implements OnInit {
         const toDo = this.toDos.find((t) => 
             t.id === id
         );
-      if (toDo) {
+        if (toDo) {
         toDo.isFinished = 1;
       }        
       }
@@ -50,6 +50,11 @@ export class IndexComponent implements OnInit {
     this.toDoText = '';
   }
 
+  deleteToDo(id: number): void {
+    this.toDoService.deleteToDo(id);
+    this.getAllToDos();
+  }
+
   getFinishedTasks(): void {
     // this.toDos = this.toDoService.getFinishedTasks()
   }
@@ -58,12 +63,6 @@ export class IndexComponent implements OnInit {
     // this.toDos = this.toDoService.getUnfinishedTasks()
   }
 
-
-
-  deleteToDo(id: number): void {
-    this.toDoService.deleteToDo(id);
-    this.getAllToDos();
-  }
 
   // completeAllTasks(): void {
   //   this.toDoService.completeAllTasks();
