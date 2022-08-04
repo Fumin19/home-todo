@@ -10,7 +10,6 @@ import { ToDoService } from 'src/app/services/toDo/to-do.service';
 
 export class IndexComponent implements OnInit {
   toDos!: ToDo[]
-  unfinishedTasksAmount: number = this.toDoService.getUnfinishedTasks().length;
   toDoText: string = '';
 
   constructor(private toDoService: ToDoService) { }
@@ -73,25 +72,4 @@ export class IndexComponent implements OnInit {
       }
     });
   }
-
-  getFinishedTasks(): void {
-    // this.toDos = this.toDoService.getFinishedTasks()
-  }
-
-  getUnfinishedTasks(): void {
-    // this.toDos = this.toDoService.getUnfinishedTasks()
-  }
-
-
-  // completeAllTasks(): void {
-  //   this.toDoService.completeAllTasks();
-  //   this.getAllToDos();
-  //   this.resetList();
-  // }
-
-  // deleteCompleted(): void {
-  //   this.toDoService.deleteCompleted();
-  //   this.getAllToDos();
-  //   this.resetList();
-  // }
 }

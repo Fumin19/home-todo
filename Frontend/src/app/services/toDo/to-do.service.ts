@@ -35,45 +35,4 @@ export class ToDoService {
       toDoId: id
     })
   }
-
-  getUnfinishedTasks(): ToDo[] {
-    // return this.toDos.filter(t => {
-    //    t.isFinished === true;
-    // });
-    let unfinishedTasks: ToDo[] = []
-    for (let i=0; i < this.toDos.length; i++) {
-      if (this.toDos[i].isFinished === 0) {
-        unfinishedTasks.push(this.toDos[i])
-      }
-    }
-    return unfinishedTasks;
-  }
-
-  getFinishedTasks(): ToDo[] {
-    let finishedTasks: ToDo[] = []
-    for (let i=0; i < this.toDos.length; i++) {
-      if (this.toDos[i].isFinished === 1) {
-        finishedTasks.push(this.toDos[i])
-      }
-    }
-    return finishedTasks;
-  }
-
-  completeAllTasks(): void {
-    for (let i = 0; i < this.toDos.length; i++) {
-        if (this.toDos[i].isFinished === 0) {
-          this.finishToDo(this.toDos[i].id);
-        }
-    }
-  }
-
-  deleteCompleted(): void {
-    for (let i = 0; i < this.toDos.length;) {
-      if (this.toDos[i].isFinished === 1) {
-        this.deleteToDo(this.toDos[i].id);
-      } else {
-        i++;
-      }
-    }
-  }
 }

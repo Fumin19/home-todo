@@ -2,7 +2,6 @@ import {db} from '../db/db'
 import { ToDo } from '../models/toDo';
 export class ToDoService{
 
-
     public static async callDb(query: string): Promise<any> {
         try {return new Promise((resolve, reject) => {
             db.query(query, (err, res) => {
@@ -14,7 +13,7 @@ export class ToDoService{
             }) 
         })
         } catch(err) {
-            console.log(`Error while accessing database. Error message: ${err}`);   
+            console.warn(`Error while accessing database. Error message: ${err}`);   
         }
     }
 
