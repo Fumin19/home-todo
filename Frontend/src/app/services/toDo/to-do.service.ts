@@ -12,14 +12,10 @@ export class ToDoService {
   private url = 'http://localhost:3000'
   constructor(private http: HttpClient) { }
 
-  addTodo(toDoText: string): boolean {
-    const toDo: ToDo = {
-      id: this.randomId(),
-      text: toDoText,
-      isFinished: 0
-    }
-    this.toDos.push(toDo);
-    return true;
+  addTodo(toDoText: string): Observable<any> {
+    return this.http.post(this.url + '/addToDo', {
+      toDoText: toDoText
+    })
   }
 
   randomId(): number {

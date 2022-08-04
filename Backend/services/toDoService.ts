@@ -34,9 +34,7 @@ export class ToDoService{
             , (err, res) => {
                 if (err) {
                     reject(err)
-                } else {
-                    console.log(res);
-                    
+                } else {                   
                     resolve(res)
                 }
             })

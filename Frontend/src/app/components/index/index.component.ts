@@ -40,13 +40,23 @@ export class IndexComponent implements OnInit {
         );
         if (toDo) {
         toDo.isFinished = 1;
-      }        
+        }        
       }
     })
   }
 
   addToDo(): void {
-    this.toDoService.addTodo(this.toDoText);
+    let text = this.toDoText;  
+    this.toDoService.addTodo(text).subscribe((res) => {
+      if (res.message === "OK") {       
+        const toDo: ToDo = {
+          id: res.id,
+          text: text,
+          isFinished: 0
+        }
+        this.toDos.push(toDo);
+      }
+    })
     this.toDoText = '';
   }
 
