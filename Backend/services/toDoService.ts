@@ -19,7 +19,7 @@ export class ToDoService{
         return this.callDb(`select * from toDoApp.toDos`);
     }
 
-    public static async addToDo(toDoText: number): Promise<any> {      
+    public static async addToDo(toDoText: string): Promise<any> {      
         return this.callDb(`insert into toDoApp.toDos (text, isFinished) 
         values 
         ("${toDoText}", 0)`)

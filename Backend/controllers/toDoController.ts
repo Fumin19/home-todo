@@ -17,12 +17,16 @@ const finishToDo = async (req: Request, res: Response) => {
 }
 
 const addToDo = async (req: Request, res: Response) => {
-    let toDoText: number = req.body.toDoText;
-    const status = await ToDoService.addToDo(toDoText);
-    if (status.affectedRows === 1) {       
-        res.status(200).json({message: "OK", id: status.insertId})
+    let toDoText: string = req.body.toDoText;
+    if (toDoText === null || toDoText === '') {
+        res.status(406).json('ToDo text is either null or empty')
     } else {
-        res.status(400).json({message: "could not add toDo"})
+        const status = await ToDoService.addToDo(toDoText);
+        if (status.affectedRows === 1) {       
+            res.status(200).json({message: "OK", id: status.insertId})
+        } else {
+            res.status(400).json({message: "could not add toDo"})
+        }
     }
 }
 
