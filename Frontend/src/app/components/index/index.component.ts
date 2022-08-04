@@ -1,5 +1,4 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { Observable, tap } from 'rxjs';
 import { ToDo } from 'src/app/models/models';
 import { ToDoService } from 'src/app/services/toDo/to-do.service';
 
@@ -11,9 +10,8 @@ import { ToDoService } from 'src/app/services/toDo/to-do.service';
 
 export class IndexComponent implements OnInit {
   toDos!: ToDo[]
-  unfinishedTasks: number = this.toDoService.getUnfinishedTasks().length;
+  unfinishedTasksAmount: number = this.toDoService.getUnfinishedTasks().length;
   toDoText: string = '';
-  
 
   constructor(private toDoService: ToDoService) { }
 
