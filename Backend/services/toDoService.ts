@@ -25,4 +25,23 @@ export class ToDoService{
             }) 
         })
     }
+
+    public static async addToDo(toDoText: number): Promise<any> {      
+        return new Promise((resolve, reject) => {
+            db.query(`insert into toDoApp.toDos (text, isFinished) 
+            values 
+            ("${toDoText}", 0)`
+            , (err, res) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    console.log(res);
+                    
+                    resolve(res)
+                }
+            })
+        })
+    }
+
+    
 }
