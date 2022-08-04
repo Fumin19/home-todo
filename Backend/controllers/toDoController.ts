@@ -18,8 +18,8 @@ const finishToDo = async (req: Request, res: Response) => {
 
 const addToDo = async (req: Request, res: Response) => {
     let toDoText: string = req.body.toDoText;
-    if (toDoText === null || toDoText === '') {
-        res.status(406).json('ToDo text is either null or empty')
+    if (toDoText === null || toDoText === '' || toDoText.length > 50) {
+        res.status(406).json('ToDo text is either null or empty, or more than 50 characters')
     } else {
         const status = await ToDoService.addToDo(toDoText);
         if (status.affectedRows === 1) {       

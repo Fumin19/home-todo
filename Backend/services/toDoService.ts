@@ -4,7 +4,7 @@ export class ToDoService{
 
 
     public static async callDb(query: string): Promise<any> {
-        return new Promise((resolve, reject) => {
+        try {return new Promise((resolve, reject) => {
             db.query(query, (err, res) => {
                 if (err) {
                     reject(err)
@@ -13,6 +13,9 @@ export class ToDoService{
                 }
             }) 
         })
+        } catch(err) {
+            console.log(`Error while accessing database. Error message: ${err}`);   
+        }
     }
 
     public static async getToDoList(): Promise<ToDo[]> {
