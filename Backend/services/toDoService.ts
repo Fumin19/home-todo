@@ -15,8 +15,15 @@ export class ToDoService{
     }
 
     public static async finishToDo(toDoId: number): Promise<any> {      
+        let isFinished: ToDo = await this.getToDoIsFinished(toDoId);
+        let setIsFinished: number;
+        isFinished[0].isFinished == 0 ? setIsFinished = 1 : setIsFinished = 0   
+        
+        // toDo.isFinished === 0 ? setIsFinished = 1 : setIsFinished = 0
+        // console.log(`is setFinished ${setIsFinished}`);
+
         return new Promise((resolve, reject) => {
-            db.query(`update toDoApp.toDos set isFinished = 1 where id = ${toDoId}`, (err, res) => {
+            db.query(`update toDoApp.toDos set isFinished = ${setIsFinished} where id = ${toDoId}`, (err, res) => {
                 if (err) {
                     reject(err)
                 } else {
@@ -45,6 +52,19 @@ export class ToDoService{
         return new Promise((resolve, reject) => {
         
             db.query(`delete from toDoApp.toDos where id=${toDoId}`, (err, res) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(res)
+                }
+            }) 
+        })
+    }
+
+    public static async getToDoIsFinished(toDoId: number): Promise<ToDo> {
+        return new Promise((resolve, reject) => {
+        
+            db.query(`select isFinished from toDoApp.toDos where id=${toDoId}`, (err, res) => {
                 if (err) {
                     reject(err)
                 } else {
