@@ -34,7 +34,7 @@ export class ToDoService {
 
   getToDoList(): Observable<ToDo[]> {
     return this.http.get<ToDo[]>(
-      this.url + '/getToDoList'
+      this.url + '/toDoList'
     );
   }
 
