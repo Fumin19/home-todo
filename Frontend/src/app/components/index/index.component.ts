@@ -1,4 +1,5 @@
 import { Component, OnInit, NgModule } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ToDo } from 'src/app/models/models';
 import { ToDoService } from 'src/app/services/toDo/to-do.service';
 
@@ -9,9 +10,10 @@ import { ToDoService } from 'src/app/services/toDo/to-do.service';
 })
 
 export class IndexComponent implements OnInit {
-  toDos: ToDo[] = this.toDoService.getToDos();
+  $toDos: Observable<ToDo[]> = new Observable;
   unfinishedTasks: number = this.toDoService.getUnfinishedTasks().length;
   toDoText: string = '';
+  
 
   constructor(private toDoService: ToDoService) { }
 
@@ -20,7 +22,8 @@ export class IndexComponent implements OnInit {
     this.toDoText = target.value
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.$toDos = this.toDoService.$toDoList
   }
 
   addToDo(): void {
@@ -31,7 +34,7 @@ export class IndexComponent implements OnInit {
 
   finishToDo(id: number): void {
     this.toDoService.finishToDo(id);
-    this.getAllTasks();
+    this.getAllToDos();
     this.resetList();
   }
 
@@ -40,32 +43,32 @@ export class IndexComponent implements OnInit {
   }
 
   getFinishedTasks(): void {
-    this.toDos = this.toDoService.getFinishedTasks()
+    // this.toDos = this.toDoService.getFinishedTasks()
   }
 
   getUnfinishedTasks(): void {
-    this.toDos = this.toDoService.getUnfinishedTasks()
+    // this.toDos = this.toDoService.getUnfinishedTasks()
   }
 
-  getAllTasks(): void {
-    this.toDos = this.toDoService.getToDos();
+  getAllToDos(): void {
+    // this.toDos = this.toDoService.getToDos();
   }
 
   deleteToDo(id: number): void {
     this.toDoService.deleteToDo(id);
-    this.getAllTasks();
+    this.getAllToDos();
     this.resetList();
   }
 
   completeAllTasks(): void {
     this.toDoService.completeAllTasks();
-    this.getAllTasks();
+    this.getAllToDos();
     this.resetList();
   }
 
   deleteCompleted(): void {
     this.toDoService.deleteCompleted();
-    this.getAllTasks();
+    this.getAllToDos();
     this.resetList();
   }
 }

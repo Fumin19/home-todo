@@ -3,6 +3,6 @@ import apiController from '../controllers/toDoController';
 
 const router = express.Router();
 
-router.get('/getToDoList', apiController.getToDoList);
+router.get('/toDoList', apiController.toDoList);
 
 export { router };

@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { ToDo } from 'src/app/models/models';
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToDoService {
   private toDos: ToDo[] = [];
+  private url = 'http://localhost:3000'
+  $toDoList: Observable<ToDo[]> = this.getToDoList()
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   addTodo(toDoText: string): boolean {
     const toDo: ToDo = {
@@ -28,6 +32,13 @@ export class ToDoService {
     return this.toDos;
   }
 
+  getToDoList(): Observable<ToDo[]> {
+    return this.http.get<ToDo[]>(
+      this.url + '/getToDoList'
+    );
+  }
+
+
   findToDoById(id: number): ToDo {
     let toDo = this.toDos.find(x => {
       return x.id === id;
@@ -35,7 +46,7 @@ export class ToDoService {
     if (toDo) {
       return toDo;
     } else {
-      throw new Error('Could not get structure name')
+      throw new Error('Could not find ToDo')
     }   
   } 
 

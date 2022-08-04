@@ -17,7 +17,7 @@
 </div>
 
 <hr>
-<div *ngFor="let toDo of toDos;">
+<div *ngFor="let toDo of ($toDos | async);">
         <div *ngIf="toDo.isFinished === false" class="listpadding">
             <button type="submit" class="buttonRed" (click)="finishToDo(toDo.id)"></button>
             {{toDo.text}}
@@ -31,14 +31,14 @@
         </div>
 </div>
 
-<hr *ngIf="toDos.length > 0">
+<!-- <hr *ngIf="toDos.length > 0"> -->
 
-<div>
+<!-- <div>
     <p>{{unfinishedTasks}} tasks left</p>
     <button type="submit" (click)="getAllTasks()">All</button>
     <button type="submit" (click)="getUnfinishedTasks()">Uncompleted</button>
     <button type="submit" (click)="getFinishedTasks()">Completed</button>
-</div>
+</div> -->
 
 
 
