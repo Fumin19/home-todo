@@ -18,10 +18,6 @@ export class ToDoService {
     })
   }
 
-  randomId(): number {
-    return Math.random() * 1000;
-  }
-
   getToDoList(): Observable<ToDo[]> {
     return this.http.get<ToDo[]>(
       this.url + '/toDoList'
@@ -34,16 +30,11 @@ export class ToDoService {
     })
   }
 
-  findToDoById(id: number): ToDo {
-    let toDo = this.toDos.find(x => {
-      return x.id === id;
+  deleteToDo(id: number): Observable<any> {
+    return this.http.post(this.url + '/deleteToDo', {
+      toDoId: id
     })
-    if (toDo) {
-      return toDo;
-    } else {
-      throw new Error('Could not find ToDo')
-    }   
-  } 
+  }
 
   getUnfinishedTasks(): ToDo[] {
     // return this.toDos.filter(t => {
@@ -66,11 +57,6 @@ export class ToDoService {
       }
     }
     return finishedTasks;
-  }
-
-  deleteToDo(id: number): void {
-    let indexOfToDo = this.toDos.findIndex((t) => t.id === id);
-    this.toDos.splice(indexOfToDo, 1);
   }
 
   completeAllTasks(): void {
