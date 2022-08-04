@@ -1,8 +1,8 @@
 import express from 'express';
-import apiController from '../controllers/toDoController';
+import toDoController from '../controllers/toDoController';
 
 const router = express.Router();
 
-router.get('/toDoList', apiController.toDoList);
+router.get('/toDoList', toDoController.toDoList);
 
 export { router };
