@@ -54,28 +54,19 @@ export class IndexComponent implements OnInit {
             t.id === id
         );
         if (toDo) {
-        toDo.isFinished = 1;
+          toDo.isFinished = 1;
         }        
       }
     })
   }
 
   deleteToDo(id: number): void {
-    console.log(`id before going to BE ${id}`);
-    console.log(this.toDos)
     this.toDoService.deleteToDo(id).subscribe((res) => {
-      if(res.message === 'OK') {    
-        console.log(`id before after BE ${id}`);
-           
+      if(res.message === 'OK') {              
         const indexOfToDo = this.toDos.findIndex((t) => 
             t.id === id
         );
-        if (indexOfToDo >= 0) {        
-            
-          console.log(`index of toDo ${indexOfToDo}`);
-          
-          this.toDos.splice(indexOfToDo, 1)
-        }        
+          this.toDos.splice(indexOfToDo, 1)     
       }
     });
   }
