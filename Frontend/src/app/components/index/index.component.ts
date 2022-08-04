@@ -53,7 +53,6 @@ export class IndexComponent implements OnInit {
         const toDo = this.toDos.find((t) => 
             t.id === id
         );
-        console.log(toDo);
         
         if (toDo) {
           if (toDo.isFinished === 0) {
