@@ -26,4 +26,14 @@ const addToDo = async (req: Request, res: Response) => {
     }
 }
 
-export default { toDoList, finishToDo, addToDo};
+const deleteToDo = async (req: Request, res: Response) => {
+    let toDoId: number = req.body.toDoId;
+    const status = await ToDoService.deleteToDo(toDoId);
+    if (status.affectedRows === 1) {       
+        res.status(200).json({message: "OK"})
+    } else {
+        res.status(400).json({message: "could not delete toDo"})
+    }
+}
+
+export default { toDoList, finishToDo, addToDo, deleteToDo};

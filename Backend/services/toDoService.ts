@@ -41,5 +41,16 @@ export class ToDoService{
         })
     }
 
-    
+    public static async deleteToDo(toDoId: number): Promise<any> {      
+        return new Promise((resolve, reject) => {
+        
+            db.query(`delete from toDoApp.toDos where id=${toDoId}`, (err, res) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(res)
+                }
+            }) 
+        })
+    }
 }
